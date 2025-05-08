@@ -59,4 +59,15 @@ RSpec.describe Bank do
 		end
 	end
 
+	describe "When files are available and processing" do
+		it "processes transactions and updates balances correctly" do
+			bank.load_accounts_from_file(accounts_csv)
+			transactions = bank.load_transactions_from_file(transactions_csv)
+			bank.process_transactions(transactions)
+
+			expect(bank.accounts['00001'].balance).to eq(650.0)
+			expect(bank.accounts['00002'].balance).to eq(7850.0)
+		end
+	end
+
 end
