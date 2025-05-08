@@ -4,11 +4,17 @@ require 'csv'
 RSpec.describe Bank do
   let(:bank) { Bank.new }
   let(:accounts_csv) { 'spec/mock_accounts.csv' }
+	let(:transactions_csv) {'spec/mock_transactions.csv'}
 
   before do
     CSV.open(accounts_csv, 'w') do |csv|
       csv << ["00001", "1000.00"]
       csv << ["00002", "7500.00"]
+    end
+
+		CSV.open(transactions_csv, 'w') do |csv|
+      csv << ["00001", "00002", "350.00"]
+      csv << ["00001", "00002", "780.00"]
     end
   end
 
@@ -16,7 +22,7 @@ RSpec.describe Bank do
     File.delete(accounts_csv) if File.exist?(accounts_csv)
   end
 
-  describe "When file exists" do
+  describe "When file exists for accounts" do
     it "loads accounts from CSV" do
         bank.load_accounts_from_file(accounts_csv)
         expect(bank.accounts['00001'].balance).to eq(1000.0)
@@ -24,11 +30,32 @@ RSpec.describe Bank do
     end
   end
 
-	describe "When file does not exist" do
+	describe "When file does not exist for accounts" do
 		it "raises error" do
 			expect {
-				bank.load_accounts_from_file("nonexistent_file.csv")
+				bank.load_accounts_from_file("nonexisting_file.csv")
 			}.to raise_error(ArgumentError, /File not found/)
 		end
 	end
+
+	describe "When file exists for transactions" do
+		it "loads transactions from transactions csv file" do
+			transactions = bank.load_transactions_from_file(transactions_csv)
+			expect(transactions[0].from_acc).to eq('00001');
+			expect(transactions[1].from_acc).to eq('00001');
+			expect(transactions[0].to_acc).to eq('00002');
+			expect(transactions[1].to_acc).to eq('00002');
+			expect(transactions[0].amount).to eq(350.0);
+			expect(transactions[1].amount).to eq(780.0);
+		end
+	end
+
+	describe "When file does not exist for transactions" do
+		it "raises error" do
+			expect {
+				bank.load_transactions_from_file("nonexisting_file.csv")
+			}.to raise_error(ArgumentError, /File not found/)
+		end
+	end
+
 end

@@ -1,6 +1,7 @@
 require 'csv'
 
 require_relative 'account'
+require_relative 'transaction'
 
 class Bank
 	def initialize
@@ -11,6 +12,13 @@ class Bank
 		is_file_existing(file_path)
 		CSV.foreach(file_path, headers: false) do |row|
       @accounts[row[0]] = Account.new(id: row[0], balance: row[1])
+    end
+	end
+
+	def load_transactions_from_file(file_path)
+		is_file_existing(file_path)
+		CSV.read(file_path, headers: false).map do |row|
+      Transaction.new(from_acc: row[0], to_acc: row[1], amount: row[2])
     end
 	end
 
