@@ -7,7 +7,6 @@ RSpec.describe Bank do
 
   before do
     CSV.open(accounts_csv, 'w') do |csv|
-      csv << ["Account", "Balance"]
       csv << ["00001", "1000.00"]
       csv << ["00002", "7500.00"]
     end

@@ -9,7 +9,7 @@ class Bank
 
 	def load_accounts_from_file(file_path)
 		is_file_existing(file_path)
-		CSV.foreach(file_path, headers: true) do |row|
+		CSV.foreach(file_path, headers: false) do |row|
       @accounts[row[0]] = Account.new(id: row[0], balance: row[1])
     end
 	end
