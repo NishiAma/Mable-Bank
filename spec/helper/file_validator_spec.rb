@@ -17,8 +17,8 @@ RSpec.describe FileValidator do
     end
 
     context 'when file exists but without extension' do
+      let(:file_path) { 'spec/helper/testfile' }
       it 'raises an ArgumentError for invalid file format' do
-        file_path = 'spec/helper/testfile'
         File.write(file_path, 'test')
         expect {
           FileValidator.validate(file_path)
@@ -27,8 +27,8 @@ RSpec.describe FileValidator do
     end
 
 		context 'when file exists but with other extension' do
+      let(:file_path) {'spec/helper/testfile.txt'}
       it 'raises an ArgumentError for invalid file format' do
-        file_path = 'spec/helper/testfile.txt'
         File.write(file_path, 'test')
         expect {
           FileValidator.validate(file_path)
@@ -38,7 +38,6 @@ RSpec.describe FileValidator do
 
     context 'when file exists and has a valid extension' do
       it 'does not raise an error' do
-        file_path = 'spec/helper/testfile.csv'
         File.write(file_path, 'name,amount')
         expect {
           FileValidator.validate(file_path)

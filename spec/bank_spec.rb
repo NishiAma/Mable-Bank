@@ -4,8 +4,8 @@ require 'csv'
 RSpec.describe Bank do
   let(:bank) { Bank.new }
   let(:accounts_csv) { 'spec/mock_accounts.csv' }
-	let(:transactions_csv) {'spec/mock_transactions.csv'}
-	let(:updated_accounts_csv) {'spec/updated_accounts_csv'}
+  let(:transactions_csv) {'spec/mock_transactions.csv'}
+  let(:updated_accounts_csv) {'spec/updated_accounts_csv'}
 
   before do
     CSV.open(accounts_csv, 'w') do |csv|
@@ -21,7 +21,7 @@ RSpec.describe Bank do
 
   after do
     File.delete(accounts_csv) if File.exist?(accounts_csv)
-		File.delete(transactions_csv) if File.exist?(transactions_csv)
+	File.delete(transactions_csv) if File.exist?(transactions_csv)
   end
 
   describe "When file exists for accounts" do
