@@ -29,7 +29,7 @@ RSpec.describe AccountRepo do
 			let(:file_path) {'spec/accounts.text'}
 
 			before do
-				File.write(file_path, 'accounts as text') 
+				File.write(file_path, 'accounts as text file') 
 			end
 
 			after do
