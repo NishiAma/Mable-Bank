@@ -1,4 +1,4 @@
-require_relative '../lib/account_repo'
+require 'account_repo'
 require 'csv'
 
 RSpec.describe AccountRepo do

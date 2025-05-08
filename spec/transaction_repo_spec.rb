@@ -1,4 +1,4 @@
-require_relative '../lib/transaction_repo'
+require 'transaction_repo'
 require 'csv'
 
 RSpec.describe TransactionRepo do

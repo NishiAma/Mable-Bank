@@ -1,4 +1,4 @@
-require_relative '../lib/transaction_processor'
+require 'transaction_processor'
 
 RSpec.describe TransactionProcessor do
 	let(:from_acc) { Account.new(id: '00001', balance: 1000.0) }

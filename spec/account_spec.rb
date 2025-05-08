@@ -1,4 +1,4 @@
-require_relative '../lib/account'
+require 'account'
 
 RSpec.describe Account do
   let(:account) { Account.new(id: '0000000000000001', balance: 500.0) }

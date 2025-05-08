@@ -1,5 +1,5 @@
-require 'account'
-require 'transaction'
+require_relative './account'
+require_relative './transaction'
 require 'logger'
 
 class TransactionProcessor

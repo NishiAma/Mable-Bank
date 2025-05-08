@@ -1,4 +1,4 @@
-require_relative '../lib/transaction'
+require 'transaction'
 
 RSpec.describe Transaction do
   let(:transaction) { Transaction.new(from_acc: '000001', to_acc: '000002', amount: 375.50) }
