@@ -20,6 +20,7 @@ RSpec.describe Bank do
 
   after do
     File.delete(accounts_csv) if File.exist?(accounts_csv)
+		File.delete(transactions_csv) if File.exist?(transactions_csv)
   end
 
   describe "When file exists for accounts" do
