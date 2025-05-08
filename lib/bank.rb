@@ -38,6 +38,14 @@ class Bank
     end
   end
 
+	def export_updated_accounts(file_path)
+    CSV.open(file_path, 'w') do |csv|
+      @accounts.each do |id, account|
+        csv << [id, format("%.2f", account.balance)]
+      end
+    end
+  end
+
 	def is_file_existing(file_path)
 		unless File.exist?(file_path)
     	raise ArgumentError, "File not found: #{file_path}"

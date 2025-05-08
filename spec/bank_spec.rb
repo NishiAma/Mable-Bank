@@ -5,6 +5,7 @@ RSpec.describe Bank do
   let(:bank) { Bank.new }
   let(:accounts_csv) { 'spec/mock_accounts.csv' }
 	let(:transactions_csv) {'spec/mock_transactions.csv'}
+	let(:updated_accounts_csv) {'spec/updated_accounts_csv'}
 
   before do
     CSV.open(accounts_csv, 'w') do |csv|
@@ -67,6 +68,21 @@ RSpec.describe Bank do
 
 			expect(bank.accounts['00001'].balance).to eq(650.0)
 			expect(bank.accounts['00002'].balance).to eq(7850.0)
+		end
+	end
+
+	describe "When updating accounts" do
+		before do
+			File.delete(updated_accounts_csv) if File.exist?(updated_accounts_csv)
+		end
+
+		it "creates the csv file for updated accounts" do
+			bank.export_updated_accounts(updated_accounts_csv)
+			expect(File).to exist(updated_accounts_csv)
+		end
+
+		after do
+			File.delete(updated_accounts_csv) if File.exist?(updated_accounts_csv)
 		end
 	end
 
